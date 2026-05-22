@@ -15,19 +15,25 @@ export default async function AccountPage() {
   if (!session?.user) redirect('/login')
 
   const userId = (session.user as any).id
-  const [orders, bookings] = await Promise.all([
-    prisma.order.findMany({
-      where: { userId },
-      include: { items: { include: { menuItem: { select: { name: true } } } } },
-      orderBy: { createdAt: 'desc' },
-      take: 10,
-    }),
-    prisma.booking.findMany({
-      where: { userId },
-      orderBy: { date: 'desc' },
-      take: 5,
-    }),
-  ])
+  let orders: any[] = []
+  let bookings: any[] = []
+  try {
+    ;[orders, bookings] = await Promise.all([
+      prisma.order.findMany({
+        where: { userId },
+        include: { items: { include: { menuItem: { select: { name: true } } } } },
+        orderBy: { createdAt: 'desc' },
+        take: 10,
+      }),
+      prisma.booking.findMany({
+        where: { userId },
+        orderBy: { date: 'desc' },
+        take: 5,
+      }),
+    ])
+  } catch {
+    // No database connected — show empty state
+  }
 
   return (
     <div className="container mx-auto px-4 py-10 max-w-4xl">
