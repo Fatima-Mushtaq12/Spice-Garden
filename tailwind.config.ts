@@ -1,0 +1,106 @@
+import type { Config } from 'tailwindcss'
+
+const config: Config = {
+  darkMode: ['class'],
+  content: [
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './emails/**/*.{ts,tsx}',
+  ],
+  prefix: '',
+  theme: {
+    container: {
+      center: true,
+      padding: '2rem',
+      screens: { '2xl': '1400px' },
+    },
+    extend: {
+      colors: {
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        primary: {
+          DEFAULT: '#D85A30',
+          foreground: '#FFFFFF',
+          50: '#FDF2EE',
+          100: '#FAE4DA',
+          200: '#F5C9B5',
+          300: '#F0AE91',
+          400: '#E88060',
+          500: '#D85A30',
+          600: '#C04820',
+          700: '#9B3919',
+          800: '#762B12',
+          900: '#521D0C',
+        },
+        secondary: {
+          DEFAULT: '#2C2C2A',
+          foreground: '#FAFAF8',
+        },
+        destructive: {
+          DEFAULT: '#E24B4A',
+          foreground: '#FFFFFF',
+        },
+        muted: {
+          DEFAULT: 'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))',
+        },
+        accent: {
+          DEFAULT: 'hsl(var(--accent))',
+          foreground: 'hsl(var(--accent-foreground))',
+        },
+        popover: {
+          DEFAULT: 'hsl(var(--popover))',
+          foreground: 'hsl(var(--popover-foreground))',
+        },
+        card: {
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))',
+        },
+        success: '#1D9E75',
+        warning: '#BA7517',
+        error: '#E24B4A',
+      },
+      borderRadius: {
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
+        xl: '16px',
+        '2xl': '24px',
+      },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+      },
+      keyframes: {
+        'accordion-down': {
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
+        },
+        'accordion-up': {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
+        },
+        'fade-in': {
+          from: { opacity: '0', transform: 'translateY(10px)' },
+          to: { opacity: '1', transform: 'translateY(0)' },
+        },
+        pulse: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.5' },
+        },
+      },
+      animation: {
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
+        'fade-in': 'fade-in 0.3s ease-out',
+        'pulse-slow': 'pulse 2s ease-in-out infinite',
+      },
+    },
+  },
+  plugins: [require('tailwindcss-animate')],
+}
+
+export default config
